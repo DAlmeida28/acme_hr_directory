@@ -7,16 +7,27 @@ const createDepartments = async (departmentName) => {
       VALUES ('${departmentName}') 
       RETURNING *;
       `)
-      
+
     const department = rows[0];
     return department;
   }
   catch (err) {
     console.log(err);
+  }
+}
+
+const getDepartments = async () => {
+  try{
+    const{ rows } = await client.query(`
+      SELECT * FROM departments;`)
+    
+      return rows; 
+  } catch (err) {
 
   }
 }
 
 module.exports = {
-  createDepartments
+  createDepartments,
+  getDepartments
 }
